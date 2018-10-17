@@ -15,6 +15,11 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -27,7 +32,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    this.props.loginUser(user);
+    this.props.loginUser(user, this.props.history);
     console.log(user);
   }
 
@@ -89,7 +94,7 @@ Login.propTypes = {
   errors: PropTypes.object.isRequired
 };
 
-// state here is governed by the ./reducers: state.auth is state
+// state here is governed by the ./reducers:
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
