@@ -4,12 +4,12 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 
 class Landing extends Component {
-  render() {
-    componentDidMount() {
-      if (this.props.auth.isAuthenticated) {
-        this.props.history.push("/dashboard");
-      }
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
     }
+  }
+  render() {
     return(
       <div className="landing">
         <div className="dark-overlay landing-inner text-light">

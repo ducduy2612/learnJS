@@ -1,4 +1,5 @@
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
+import { getErrors } from "./errorActions"
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -9,10 +10,7 @@ export const registerUser = (userData, history) => dispatch => {
     .post("/api/users/register", userData)
     .then(res => history.push("/login"))
     .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+      dispatch(getErrors(err.response.data))
     );
 };
 
@@ -34,10 +32,7 @@ export const loginUser = (userData, history) => dispatch => {
     })
     .then(res => history.push("/dashboard"))
     .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
+      dispatch(getErrors(err.response.data))
     );
 };
 
